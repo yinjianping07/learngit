@@ -112,11 +112,11 @@ public class MapOption {
     */
     public List<MapResult> getBetween(Point origin,Point destination){
 
-        List<MapResult> pathList = new LinkedList<>();
+        List<MapResult> pathList = new ArrayList<>();
 
-        try(CloseableHttpClient client = HttpClientBuilder.create().build();
+        try(CloseableHttpClient client = HttpClientBuilder.create().build()
         ){
-            URIBuilder uriBuilder = new URIBuilder("https://restapi.amap.com/v3/geocode/geo");
+            URIBuilder uriBuilder = new URIBuilder("https://restapi.amap.com/v3/direction/driving");
 
             List<NameValuePair> list = new LinkedList<>();
 
@@ -145,14 +145,13 @@ public class MapOption {
 
             JSONObject jsonObject = new JSONObject(entityStr);
             JSONArray paths = jsonObject.getJSONObject("route").getJSONArray("paths");
-            for (Object object : paths){
-                JSONObject temp = new JSONObject(object);
+            for (int i = 0;i<paths.length();i++) {
+                JSONObject temp = paths.getJSONObject(i);
                 Integer distance = Integer.valueOf(temp.getString("distance"));
                 Integer duration = Integer.valueOf(temp.getString("duration"));
                 String strategy = temp.getString("strategy");
-                pathList.add(new MapResult(distance,duration,strategy));
+                pathList.add(new MapResult(distance, duration, strategy));
             }
-
 
         }catch(IOException e){
             log.info("IOException");
@@ -162,6 +161,24 @@ public class MapOption {
         return pathList;
     }
     public String stringLocation(Double double1,Double double2){
-        return String.valueOf(double1)+String.valueOf(double2);
+        return String.valueOf(double1)+","+String.valueOf(double2);
+    }
+
+    public String timeTransfer(Integer second){
+        String time = "小于1分钟";
+        if (60<=second&&second<3600){
+            int min = second/60;
+            time = String.valueOf(min)+"分钟";
+        }
+        if (3600<second&&second<86400){
+            int min = second%3600;
+            min = min/60;
+            int hour = second/3600;
+            time = String.valueOf(hour)+"小时"+String.valueOf(min)+"分钟";
+        }
+        if (86400<second){
+            time = "大于一天";
+        }
+        return time;
     }
 }

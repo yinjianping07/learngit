@@ -1,38 +1,31 @@
 package com.xiankejidaxue.yinjianping.bus;
 
-
+import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Scanner;
 
 @SpringBootApplication
+@Log4j2
 public class BusApplication {
 
 	public static void main(String[] args){
 
+//		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+//
+//		System.out.println("opencv version is :"+Core.VERSION);
+//		Mat m = new Mat(5, 10, CvType.CV_8UC1, new Scalar(0));
+//		System.out.println("OpenCV Mat: " + m);
+//		Mat mr1 = m.row(1);
+//		mr1.setTo(new Scalar(1));
+//		Mat mc5 = m.col(5);
+//		mc5.setTo(new Scalar(5));
+//		System.out.println("OpenCV Mat data:\n" + m.dump());
+
 //		ArrayList<Object> set1 = new ArrayList<Object>(Arrays.asList(new String[]{"red","yellow","green"}));
 //		ArrayList<Object> set2 = new ArrayList<Object>(Arrays.asList(new String[]{"red","yellow","blue"}));
 
-//		System.out.println(set1.addAll(set2));
-//		System.out.println("addAll"+set1+"--"+set2);
 
-//		System.out.println(set1.add(set2));
-//		System.out.println("add"+set1+"--"+set2);
-//
-//		System.out.println(set1.removeAll(set2));
-//		System.out.println("removeAll"+set1+"--"+set2);
-//
-//		System.out.println(set1.remove(set2));
-//		System.out.println("remove"+set1+"--"+set2);
-//
-//		System.out.println(set1.retainAll(set2));
-//		System.out.println("retainAll"+set1+"--"+set2);
-
-
-				SpringApplication.run(BusApplication.class, args);
+		SpringApplication.run(BusApplication.class, args);
 	}
 }
