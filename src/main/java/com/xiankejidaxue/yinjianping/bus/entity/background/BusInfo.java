@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @Author:yinjianping
@@ -20,6 +18,7 @@ import javax.persistence.Id;
 @ToString
 public class BusInfo {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "bus_id")
     private Integer busId;
 

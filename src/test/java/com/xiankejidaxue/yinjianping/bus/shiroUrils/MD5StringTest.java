@@ -15,6 +15,6 @@ public class MD5StringTest {
 
     @Test
     public void getHashAlgorithm() {
-        System.out.println(new MD5String("yinjiangping","123456").getString());
+        System.out.println(new MD5String("wangteng","123456").getString());
     }
 }

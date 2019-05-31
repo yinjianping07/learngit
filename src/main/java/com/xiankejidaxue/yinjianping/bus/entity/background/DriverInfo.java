@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @Author:yinjianping
@@ -21,6 +19,7 @@ import javax.persistence.Id;
 public class DriverInfo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "driver_id")
     private Integer driverId;
 
@@ -34,7 +33,7 @@ public class DriverInfo {
     private String driverSex;
 
     @Column(name = "driver_telphone")
-    private Integer driverTelphone;
+    private String driverTelphone;
 
     @Column(name = "driver_landline")
     private String driverLandLine;

@@ -1,16 +1,12 @@
 package com.xiankejidaxue.yinjianping.bus.controller;
 
+import com.xiankejidaxue.yinjianping.bus.result.LoginResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Collections;
+import org.springframework.web.bind.annotation.*;
 
 
 /**
@@ -20,19 +16,17 @@ import java.util.Collections;
  * @Modified By:
  */
 @Controller
-@RequestMapping("/shiro")
 public class ShiroHandler {
 
-    @GetMapping(value = "/index")
+    @GetMapping(value = "/login")
     public String Login(){
-        System.out.println("login ===>GET");
-        return "index";
+        return "login";
     }
 
-    @RequestMapping(value = "/index",method = RequestMethod.POST)
-    public String Login(@RequestParam("username") String username,
-                        @RequestParam("password") String password,
-                        Model model){
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @ResponseBody
+    public LoginResult Login(@RequestParam("userName") String username,
+                        @RequestParam("pwd") String password){
 
         System.out.println("request:/login=====>post");
         System.out.println(username+"--------->"+password);
@@ -45,25 +39,23 @@ public class ShiroHandler {
             //remember
             token.setRememberMe(true);
             try{
+                //登录操作
                 currentUser.login(token);
+
             }catch (UnknownAccountException exception){
-                model.addAttribute("msg","账户名不存在");
-                return "index";
+                return new LoginResult(1);
             }catch (IncorrectCredentialsException exception){
-                model.addAttribute("msg","密码错误");
-                return "index";
+                return new LoginResult(2);
             }catch (LockedAccountException exception){
-                model.addAttribute("msg","账户被锁定");
-                return "index";
+                return new LoginResult(3);
             }catch(AuthenticationException exception){
                 //统一处理异常
                 System.out.println("登陆失败,原因："+exception.getMessage());
-                model.addAttribute("msg",exception.getMessage());
-                return "index";
             }
         }
-        return "busList";
+        return new LoginResult(0);
     }
+
     @GetMapping("/logout")
     public String Logout(){
 
@@ -72,7 +64,7 @@ public class ShiroHandler {
         Subject currentUser = SecurityUtils.getSubject();
         //执行等处操作
         currentUser.logout();
-        return "index";
+        return "login";
     }
 
     @GetMapping(value = "/timeList")
@@ -96,8 +88,6 @@ public class ShiroHandler {
 
     @GetMapping(value = "/busList")
     public String busList(){
-
-        //HashSet<Character> set = new HashSet(Arrays.asList(new Character[]{'A','B','E'}));
 
         System.out.println("Get===================>busList");
         return "busList";

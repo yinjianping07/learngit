@@ -54,7 +54,7 @@ public class MapOption {
 
             HttpGet httpGet = new HttpGet(uriBuilder.build());
 
-            //获得相应
+            //获得response
             CloseableHttpResponse closeableHttpResponse = client.execute(httpGet);
 
             //获得相应的实体
@@ -160,6 +160,7 @@ public class MapOption {
         }
         return pathList;
     }
+
     public String stringLocation(Double double1,Double double2){
         return String.valueOf(double1)+","+String.valueOf(double2);
     }

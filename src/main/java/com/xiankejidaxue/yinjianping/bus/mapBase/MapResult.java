@@ -20,7 +20,6 @@ public class MapResult {
     private String strategy;
 
     public MapResult(){
-
     }
     public MapResult(Integer distance,Integer duration,String strategy){
         this.distance = distance;

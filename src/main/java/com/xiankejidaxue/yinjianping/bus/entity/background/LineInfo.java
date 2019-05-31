@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @Author:yinjianping
@@ -21,6 +19,7 @@ import javax.persistence.Id;
 public class LineInfo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "line_id")
     private Integer lineId;
 

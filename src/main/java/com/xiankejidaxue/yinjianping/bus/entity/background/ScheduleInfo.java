@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @Author:yinjianping
@@ -21,6 +19,7 @@ import javax.persistence.Id;
 public class ScheduleInfo {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "schedule_id")
     private Integer scheduleId;
 
@@ -37,5 +36,8 @@ public class ScheduleInfo {
     private Integer lineId;
 
     @Column(name = "state")
-    private Integer state;
+    private Integer state = 0;
+
+    @Column(name = "number",columnDefinition = "int(5) default 0 comment '该班次的实际运行的人数'")
+    private Integer number;
 }

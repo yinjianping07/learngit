@@ -4,6 +4,8 @@ import com.xiankejidaxue.yinjianping.bus.entity.background.DriverInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @Author:yinjianping
  * @Description:
@@ -12,4 +14,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface DriverInfoRepository extends JpaRepository<DriverInfo,Integer> {
+
+    List<DriverInfo> findByDriverNameLike(String name);
 }

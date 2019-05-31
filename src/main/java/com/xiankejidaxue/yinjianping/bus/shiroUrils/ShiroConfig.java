@@ -33,17 +33,27 @@ public class ShiroConfig {
         //拦截器.
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
 
-        filterChainDefinitionMap.put("/shiro/logout","logout");
-        filterChainDefinitionMap.put("/shiro/index","anon");
-        filterChainDefinitionMap.put("/shiro/**","authc");
+        filterChainDefinitionMap.put("/bus/**","anon");
+        filterChainDefinitionMap.put("/driver/**","anon");
+        filterChainDefinitionMap.put("/schedule/**","anon");
+        filterChainDefinitionMap.put("/time/**","anon");
+        filterChainDefinitionMap.put("/line/**","anon");
+        filterChainDefinitionMap.put("/logout","logout");
+        filterChainDefinitionMap.put("/index","anon");
+        filterChainDefinitionMap.put("/assets/**","anon");
+        filterChainDefinitionMap.put("login.html","anon");
+        filterChainDefinitionMap.put("/css/**","anon");
+        filterChainDefinitionMap.put("/js/**","anon");
+        filterChainDefinitionMap.put("/images/**","anon");
+        filterChainDefinitionMap.put("/**","authc");
 
-        shiroFilterFactoryBean.setLoginUrl("index");
-        shiroFilterFactoryBean.setSuccessUrl("busList");
+        shiroFilterFactoryBean.setLoginUrl("/login");
+        shiroFilterFactoryBean.setSuccessUrl("/busList");
 //        // 配置不会被拦截的链接 顺序判断
 //        filterChainDefinitionMap.put("/pages/**", "anon");
 //        //配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了
 //        filterChainDefinitionMap.put("/pages/logout", "logout");
-//        //<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
+//        //<!-- 过滤链定义，从上向下顺序执行，一般将/**放在最为下边 -->:这是一个坑，一不小心代码就不好使了;
 //        //<!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
 //        filterChainDefinitionMap.put("/pages/**", "authc");
 //        // 如果不设置默认会自动寻找Web工程根目录下的"/login"页面
@@ -65,7 +75,7 @@ public class ShiroConfig {
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher(){
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("MD5");//散列算法:这里使用md5算法;
+        hashedCredentialsMatcher.setHashAlgorithmName("md5");//散列算法:这里使用md5算法;
         hashedCredentialsMatcher.setHashIterations(1024);//散列的次数，比如散列两次，相当于 md5( md5(""));
         return hashedCredentialsMatcher;
     }
